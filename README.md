@@ -4,6 +4,13 @@ can be provisioned by [Ansible](https://www.ansible.com/) as it is constructed. 
 an [LVM](https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)) partition from the attached 
 [EBS](https://aws.amazon.com/ebs/) volumes and format it for use.
 
+1. create a CloudFormation template the creates an EC2 instance and EBS store
+1. run the template
+1. have the template execute a simble Bash command
+1. copy a script from S3 into the instance
+1. run the script
+1. refined the script to run Ansible
+
 # Prerequisites
 * TODO 
 
