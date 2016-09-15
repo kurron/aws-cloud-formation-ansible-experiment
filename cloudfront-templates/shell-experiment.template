@@ -1,0 +1,69 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+
+    "Description" : "Here are some details about the template.",
+
+    "Metadata" : {
+        "foo" : {"Description" : "Information about the instances"},
+        "bar" : {"Description" : "Information about the databases"}
+    },
+
+    "Parameters" : {
+        "VpcID" : {
+            "Description" : "The VPC the stack should be deployed into.",
+            "Type" : "AWS::EC2::VPC::Id"
+        },
+        "SubnetID" : {
+            "Description" : "The Subnet the stack should be deployed into.",
+            "Type" : "AWS::EC2::Subnet::Id"
+        },
+        "SecurityGroupID" : {
+            "Description" : "The Security Group the instances should be wrapped with.",
+            "Type" : "AWS::EC2::SecurityGroup::Id"
+        },
+        "AlphaAmi" : {
+            "Description" : "The AMI to create the Alpha instance from.",
+            "Default" : "ami-d732f0b7",
+            "Type" : "AWS::EC2::Image::Id"
+        },
+        "BravoAmi" : {
+            "Description" : "The AMI to create the Bravo instance from.",
+            "Default" : "ami-d732f0b7",
+            "Type" : "AWS::EC2::Image::Id"
+        },
+        "CharlieAmi" : {
+            "Description" : "The AMI to create the Charlie instance from.",
+            "Default" : "ami-d732f0b7",
+            "Type" : "AWS::EC2::Image::Id"
+        },
+        "KeyPairName" : {
+            "Description" : "The name of the key pair to bind the instances to.",
+            "Type" : "AWS::EC2::KeyPair::KeyName"
+        }
+    },
+
+    "Mappings" : {},
+
+    "Conditions" : {},
+
+    "Resources" : {
+        "AlphaInstance" : {
+            "Type" : "AWS::EC2::Instance",
+            "Properties" : {
+                "ImageId" : { "Ref": "AlphaAmi" },
+                "InstanceType" : "t2.micro",
+                "KeyName" : { "Ref": "KeyPairName" },
+                "Monitoring" : true,
+                "SecurityGroupIds" : [ { "Ref": "SecurityGroupID" } ],
+                "SubnetId" : { "Ref": "SubnetID" }
+            }
+        }
+    },
+
+    "Outputs" : {
+        "AlphaID" : {
+            "Description" : "Alpha's Instance ID",
+            "Value" : { "Ref": "AlphaInstance" } 
+        }
+    }
+}
