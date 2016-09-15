@@ -54,8 +54,14 @@
                 "InstanceType" : "t2.micro",
                 "KeyName" : { "Ref": "KeyPairName" },
                 "Monitoring" : true,
-                "SecurityGroupIds" : [ { "Ref": "SecurityGroupID" } ],
-                "SubnetId" : { "Ref": "SubnetID" }
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": "true",
+                        "DeviceIndex": "0",
+                        "GroupSet": [ { "Ref" : "SecurityGroupID" } ],
+                        "SubnetId": { "Ref" : "SubnetID" }
+                    }
+                ]
             }
         }
     },
